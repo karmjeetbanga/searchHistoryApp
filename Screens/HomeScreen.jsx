@@ -2,14 +2,11 @@ import React, {useEffect, useState} from 'react';
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View, FlatList, TextInput,Button,Keyboard, TouchableOpacity} from 'react-native';
 import axios from 'axios';
-import { Feather, Entypo } from "@expo/vector-icons";
-
  
-export default function HomeScreen({navigation}) {
+export default function HomeScreen(){
 
     const [historicalEventsData, setHistoricalEventsData] = useState([]);
     const [filteredData,setFilteredData] = useState(historicalEventsData);
-     const [clicked, setClicked] = useState(false);
  
      const handleSearch = (searchKeywords) => {
       let value = searchKeywords.toLowerCase();
@@ -21,65 +18,35 @@ export default function HomeScreen({navigation}) {
       });
 
       setFilteredData(result);
-    }
+    };
 
-    
-    useEffect(() => {
-        axios.get('/Users/karmjeet.k/Sites/Stub/searchHistoryApp/data.json')
+      useEffect(() => {
+        axios.get('/Users/karmjeet.k/Sites/searchHistoryApp/Stub/data.json')
         .then((response) => {
+         // console.log(response.data);
             setHistoricalEventsData(response.data);
             setFilteredData(response.data);
         })
         .catch((error) => {
-            console.log('Error getting fake data: ' + error);
+            console.log('Error: ' + error);
         })
     }, [])
 
 const renderItem = ({ item }) => (
-    <View style={styles.Listcontainer}>
-      <Text style={styles.textStyle}> {item.date}</Text>
-      <Text style={ styles.textStyle}> {item.category2}</Text>
+    <View style={styles.listContainer}>
+      <Text style={styles.headeStyle}> {item.category2}</Text>
       <Text style={styles.textStyle}> {item.description}</Text>
     </View>
   );
 
  return (
     <View style={styles.container}>
-      <View style={
-          clicked
-            ? styles.searchBar__clicked
-            : styles.searchBar__unclicked
-        }>
-       
-      <TextInput 
+    <TextInput 
           style={styles.input} 
-          placeholder="Search"
+          placeholder="Search history by place (eg. Asia, Africa etc.)"
           value={filteredData}
           onChangeText={(event) =>handleSearch(event)}
-          onFocus={() => {
-            setClicked(true);
-          }} />
-          {/* <TouchableOpacity  onPress={()=> ShowList()}>
-         <Feather
-          name="search"
-          size={30}
-          color="black"
-          style={styles.searchIcon}
-        />
-        </TouchableOpacity>
-           {clicked && (
-        <View>
-          <Button
-            title="Cancel"
-            onPress={() => {
-              Keyboard.dismiss();
-              setClicked(false);
-              setSearch("");
-            }}
-          ></Button>
-        </View>
-      )} */}
-      </View>
+          />
      <FlatList
         data={filteredData}
         renderItem={renderItem}
@@ -94,7 +61,7 @@ const renderItem = ({ item }) => (
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: 'white',
     alignItems: 'center',
     justifyContent: 'center',
   }, 
@@ -102,21 +69,34 @@ const styles = StyleSheet.create({
         borderBottomColor:'rgb(230, 236, 240)',
         borderBottomWidth: 1,
   },
-  Listcontainer: {
+  listContainer: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: '#F8F9F9',
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 10,
+    borderTopLeftRadius: 20,
+    borderTopRightRadius: 20,
+    borderBottomLeftRadius: 20,
+    borderBottomRightRadius: 20,
+    marginTop: 10,
+    marginBottom: 10,
+    marginLeft: 10,
+    marginRight: 10,
+  },
+  headeStyle: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'rgb(0, 0, 0)',
+    padding: 10,
   },
    textStyle: {
     flexWrap: 'wrap',
     paddingBottom: 5,
     paddingTop: 5,
     fontSize: 16,
-    color: 'rgb(0, 0, 0)',
-   
+    color: 'rgb(0, 0, 0)',  
 },
-
   searchContainer: {
     flexDirection: "row",
     alignItems: "center",
@@ -124,32 +104,17 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 5,
     margin: 10,
-  },
-  
-  searchBar__unclicked: {
+    backgroundColor: "rgb(230, 236, 240)",
     padding: 10,
-    flexDirection: "row",
-    width: "95%",
-
-    borderRadius: 15,
-    alignItems: "center",
-  },
-  searchBar__clicked: {
-    padding: 10,
-    flexDirection: "row",
-    width: "80%",
-    borderRadius: 15,
-    alignItems: "center",
-    justifyContent: "space-evenly",
-  },
+},
   input: {
-    height: 40,
-     width: "80%",
+    width: "90%",
     margin: 12,
     borderWidth: 1,
     borderRadius: 5,
     padding: 10,
-    alignItems:"flex-end"
+    backgroundColor: "rgb(230, 236, 240)",
+    alignItems: "center",
   },
   searchIcon: {
     padding: 10,
