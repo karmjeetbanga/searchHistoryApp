@@ -21,7 +21,7 @@ export default function HomeScreen(){
     };
 
       useEffect(() => {
-        axios.get('/Users/karmjeet.k/Sites/searchHistoryApp/Stub/data.json')
+        axios.get('https://raw.githubusercontent.com/karmjeetbanga/event-history/main/eventHistoryData.json')
         .then((response) => {
          // console.log(response.data);
             setHistoricalEventsData(response.data);
