@@ -6,7 +6,7 @@ This is a simple React Native Search application that allows users to search JSO
 
 - Get Json data by making Api call to external endpoint.
 
-- Search Histroy event by Country Name.
+- Search Histroy event by place eg. Asia, Amarica, Roman Empire etc.
 
 
 
