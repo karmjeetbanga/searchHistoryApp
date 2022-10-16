@@ -8,25 +8,18 @@ This is a simple React Native Search application that allows users to search JSO
 
 - Search Histroy event by place eg. Asia, Amarica, Roman Empire etc.
 
+- Auto Suggestion drop down list on search bar. (Search Bar has feature: Type in Or Select from suggestion list)
 
-
-## How to use this project 
+## How to use this project
 
 #### Install Package dependency.
 
-```npm install```
+`npm install`
 
 #### Start App
 
-```npm start```
-
-
+`npm start`
 
 ## Example:
 
-
 ![Demo](https://github.com/karmjeetbanga/searchHistoryApp/blob/main/assets/demo.gif)
-
-
-
-
