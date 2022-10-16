@@ -35,10 +35,6 @@ export default function HomeScreen() {
     setFilteredData(result);
   };
 
-  const onSearchBarClearEvent = () => {
-    setFilteredData(historicalEventsData);
-  };
-
   const getSuggestionList = () => {
     let category2 = historicalEventsData
       .map((item) => {
@@ -62,6 +58,10 @@ export default function HomeScreen() {
     if (searchSuggestionData.length === 0) {
       getSuggestionList();
     }
+  };
+
+  const onSearchBarClearEvent = () => {
+    setFilteredData(historicalEventsData);
   };
 
   const renderItem = ({ item }) => (
